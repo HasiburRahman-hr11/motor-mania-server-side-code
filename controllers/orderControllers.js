@@ -17,7 +17,7 @@ exports.createNewOrder = async (req, res) => {
 // Get All Order
 exports.getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find().sort({ createdAt:1 })
+        const orders = await Order.find().sort({ createdAt:-1 })
         res.status(201).json(orders);
     } catch (error) {
         console.log(error);
