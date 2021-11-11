@@ -17,7 +17,7 @@ exports.createNewOrder = async (req, res) => {
 // Get All Order
 exports.getAllOrders = async (req, res) => {
     try {
-        const orders = await Order.find().sort({ createdAt:-1 })
+        const orders = await Order.find().sort({ createdAt: -1 })
         res.status(201).json(orders);
     } catch (error) {
         console.log(error);
@@ -46,7 +46,7 @@ exports.getSingleOrder = async (req, res) => {
 exports.getOrdersByUserEmail = async (req, res) => {
     const { email } = req.params;
     try {
-        const orders = await Order.find({ email: email }).sort({ createdAt:-1 });
+        const orders = await Order.find({ email: email }).sort({ createdAt: -1 });
         res.status(201).json(orders);
     } catch (error) {
         console.log(error);
@@ -60,6 +60,26 @@ exports.deleteOrder = async (req, res) => {
     try {
         await Order.findByIdAndDelete(id)
         res.status(201).json({ message: 'Order deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+
+// Update a Order
+exports.updateOrder = async (req, res) => {
+    const { id } = req.params;
+    try {
+
+        const order = await Order.findById(id);
+        if (!order) {
+            return res.status(400).json({ message: 'Order not found!' });
+        }
+
+        const updatedOrder = await Order.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json(updatedOrder);
+
     } catch (error) {
         console.log(error);
         res.status(500).json(error);

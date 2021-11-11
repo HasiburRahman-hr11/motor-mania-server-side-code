@@ -64,3 +64,17 @@ exports.updateProduct = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+
+
+// Delete Product 
+exports.deleteProduct = async (req, res) => {
+    const { id } = req.params;
+    try {
+        await Product.findByIdAndDelete(id)
+        res.status(201).json({ message: 'Product deleted successfully' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}

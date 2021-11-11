@@ -15,7 +15,11 @@ const orderSchema = new Schema({
     },
     phone: String,
     productName: String,
-    productId: String
+    productId: String,
+    status:{
+        type: String,
+        default:'pending'
+    }
 }, { timestamps: true });
 
 const Order = model('Order', orderSchema);

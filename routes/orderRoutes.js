@@ -1,4 +1,4 @@
-const { createNewOrder, getAllOrders, getSingleOrder, getOrdersByUserEmail, deleteOrder } = require('../controllers/orderControllers');
+const { createNewOrder, getAllOrders, getSingleOrder, getOrdersByUserEmail, deleteOrder, updateOrder } = require('../controllers/orderControllers');
 
 const router = require('express').Router();
 
@@ -16,5 +16,8 @@ router.get('/:id', getSingleOrder);
 
 // Delete Order
 router.delete('/:id' , deleteOrder);
+
+// Update Order
+router.put('/:id' , updateOrder);
 
 module.exports = router;
