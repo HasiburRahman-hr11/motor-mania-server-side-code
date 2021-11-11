@@ -1,9 +1,19 @@
 const homeRoute = require('./homeRoute');
+const userRoute = require('./userRoutes');
+const productRoute = require('./productRoutes');
 
 const routes = [
     {
         handler: homeRoute,
         path: '/'
+    },
+    {
+        handler: userRoute,
+        path: '/users'
+    },
+    {
+        handler:productRoute,
+        path:'/products'
     }
 ]
 
