@@ -26,7 +26,7 @@ exports.createNewUser = async (req, res) => {
 
 
 // Get User by Email
-exports.getSingleUser = async (req, res) => {
+exports.getUserByEmail = async (req, res) => {
     const { email } = req.params
     try {
         const user = await User.findOne({ email: email });
@@ -37,6 +37,58 @@ exports.getSingleUser = async (req, res) => {
         }
 
         res.status(200).json(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+
+
+// Get User by Id
+exports.getUserById = async (req, res) => {
+    const { id } = req.params
+    try {
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({
+                message: 'User not found!'
+            });
+        }
+
+        res.status(200).json(user);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+
+// Get All Users
+exports.getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find().sort({ createdAt: -1 });
+        res.status(200).json(users);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
+
+
+// Update an User
+exports.updateUser = async (req, res) => {
+    const { id } = req.params;
+    try {
+
+        const user = await User.findById(id);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found!' });
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(id, req.body, { new: true });
+        res.status(200).json(updatedUser);
+
     } catch (error) {
         console.log(error);
         res.status(500).json(error);

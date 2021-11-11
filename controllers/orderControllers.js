@@ -67,7 +67,7 @@ exports.deleteOrder = async (req, res) => {
 }
 
 
-// Update a Order
+// Update an Order
 exports.updateOrder = async (req, res) => {
     const { id } = req.params;
     try {
