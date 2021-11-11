@@ -44,3 +44,23 @@ exports.getSingleProduct = async (req, res) => {
         res.status(500).json(error);
     }
 }
+
+
+// Update a Product
+exports.updateProduct = async (req, res) => {
+    const { id } = req.params;
+    try {
+
+        const product = await Product.findById(id);
+        if (!product) {
+            return res.status(400).json({ message: 'Product not found!' });
+        }
+
+        const updatedProduct = await Product.findByIdAndUpdate(id , req.body ,{new:true});
+        res.status(200).json(updatedProduct);
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json(error);
+    }
+}
